@@ -19,6 +19,7 @@ $(document).ready(function () {
     var destinationName
     var firstTrainTime
     var frequency
+    var firstTrain
 
     $("#search").on("click", function () {
         console.log("hello")
@@ -29,8 +30,8 @@ $(document).ready(function () {
         frequency = $("#frequency").val()
         var newTrain = {
             name: name,
-            Destination: destinationName,
-            FirstTrain: firstTrainTime,
+            destination: destinationName,
+            firstTrain: firstTrainTime,
             trainFrequency: frequency,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         }
@@ -38,17 +39,19 @@ $(document).ready(function () {
         database.ref().push(newTrain)
     })
     // var childSnapshot
-    database.ref().on("child_added", function (childSnapShot, prevChildKey) {
-        console.log(childSnapShot.val().name);
-        console.log(childSnapShot.val().Destination);
-        console.log(childSnapShot.val().FirstTrain);
-        console.log(childSnapShot.val().trainFrequency);
+    database.ref().on("child_added", function (childSnapshot, prevChildKey) {
+        console.log(childSnapshot.val().name);
+        console.log(childSnapshot.val().Destination);
+        console.log(childSnapshot.val().FirstTrain);
+        console.log(childSnapshot.val().trainFrequency);
 
     })
     // function calculateTimes(freq, firstTrain) {
     //     var tFrequency = freq;
 
         var firstTime = firstTrain;
+        var tFrequency
+        frequency = tFrequency
 
         var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
         console.log(firstTimeConverted);
@@ -73,7 +76,9 @@ $(document).ready(function () {
     $("#form-group").append("<div class='well'><span class='member-name'> " + childSnapshot.val().name +
         " </span><span class='member-destination'> " + childSnapshot.val().destination +
           " </span><span class='member-FirstTrain'> " + childSnapshot.val().FirstTrain +
-            " </span><span class='member-frequency'> " + childSnapshot.val().frequency + " </span></div>");
+            " </span><span class='member-frequency'> " + childSnapshot.val().frequency + 
+            " </span><span class='member-nextTrain'> " + childSnapshot.val().nextTrain + 
+            " </span><span class='member-tminutesTillTrain'> " + childSnapshot.val().tminutesTillTrain + " </span></div>");
           
         }, function(errorObject) {
             console.log("Errors handled: " + errorObject.code);
