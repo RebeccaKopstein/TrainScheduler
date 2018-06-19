@@ -1,4 +1,33 @@
+body {
+    background: #9A8F97;
+
+}
+
+
 .jumbotron {
-    background: rgb(255, 255, 117);
+    background: #6B0504;
     text-align: center;
+    color: #F4DF3A;
+}
+
+.form-group {
+    background: #283044;
+    color: #FFFFFF;
+}
+
+.col-md-12 main {
+    background: #283044
+}
+
+.col-md-8 {
+    text-align: center;
+    margin: auto;
+}
+
+#clear {
+    background: #F4DF3A;
+}
+
+#search{
+    background: #F4DF3A;
 }
