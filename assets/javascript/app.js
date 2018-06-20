@@ -38,32 +38,31 @@ $(document).ready(function () {
         console.log(newTrain)
         database.ref().push(newTrain)
     })
+
+
+    
     // var childSnapshot
     database.ref().on("child_added", function (childSnapshot, prevChildKey) {
         console.log(childSnapshot.val().name);
-        console.log(childSnapshot.val().Destination);
-        console.log(childSnapshot.val().FirstTrain);
+        console.log(childSnapshot.val().destination);
+        console.log(childSnapshot.val().firstTrain);
         console.log(childSnapshot.val().trainFrequency);
-
-    })
-    // function calculateTimes(freq, firstTrain) {
-    //     var tFrequency = freq;
 
         var firstTime = firstTrain;
         var tFrequency
         frequency = tFrequency
 
         var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-        console.log(firstTimeConverted);
+        // console.log(firstTimeConverted);
 
         var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
         var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        console.log("DIFFERENCE IN TIME: " + diffTime);
+        // console.log("DIFFERENCE IN TIME: " + diffTime);
 
         var tRemainder = diffTime % tFrequency;
-        console.log(tRemainder);
+        // console.log(tRemainder);
 
         var tMinutesTillTrain = tFrequency - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
@@ -71,26 +70,60 @@ $(document).ready(function () {
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
+        $("#tbdata").append("<tr class='member-name'> <td class='member-destination' >" + childSnapshot.val().name +
+        "</td> <td class='member-destination'> " + childSnapshot.val().destination +
+          " </td><td class='member-FirstTrain'> " + childSnapshot.val().firstTrain +
+            " </td><td class='member-frequency'> " + childSnapshot.val().trainFrequency + 
+            " </td><td class='member-nextTrain'> " + moment(nextTrain).format("hh:mm") + 
+            " </td><td class='member-tminutesTillTrain'> " + tMinutesTillTrain + " </td></tr>");
+          
+    
+    })
+    // function calculateTimes(freq, firstTrain) {
+    //     var tFrequency = freq;
+
+        // var firstTime = firstTrain;
+        // var tFrequency
+        // frequency = tFrequency
+
+        // var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+        // console.log(firstTimeConverted);
+
+        // var currentTime = moment();
+        // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+        // var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        // console.log("DIFFERENCE IN TIME: " + diffTime);
+
+        // var tRemainder = diffTime % tFrequency;
+        // console.log(tRemainder);
+
+        // var tMinutesTillTrain = tFrequency - tRemainder;
+        // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+        // var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+        // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+    
 
 
-    $("#form-group").append("<div class='well'><span class='member-name'> " + childSnapshot.val().name +
-        " </span><span class='member-destination'> " + childSnapshot.val().destination +
-          " </span><span class='member-FirstTrain'> " + childSnapshot.val().FirstTrain +
-            " </span><span class='member-frequency'> " + childSnapshot.val().frequency + 
-            " </span><span class='member-nextTrain'> " + childSnapshot.val().nextTrain + 
-            " </span><span class='member-tminutesTillTrain'> " + childSnapshot.val().tminutesTillTrain + " </span></div>");
+    // $("<tbody>").append("<tr class='member-name'> " + childSnapshot.val().name +
+    //     " <td class='member-destination'> " + childSnapshot.val().destination +
+    //       " </td><td class='member-FirstTrain'> " + childSnapshot.val().FirstTrain +
+    //         " </td><td class='member-frequency'> " + childSnapshot.val().frequency + 
+    //         " </td><td class='member-nextTrain'> " + childSnapshot.val().nextTrain + 
+    //         " </td><td class='member-tminutesTillTrain'> " + childSnapshot.val().tminutesTillTrain + " </td></tr>");
           
         }, function(errorObject) {
             console.log("Errors handled: " + errorObject.code);
           });
 
-database.ref().orderByChild("dateAdded").limitToLast(1).on("child.added", function (snapshot) {
+// database.ref().orderByChild("dateAdded").limitToLast(1).on("child.added", function (snapshot) {
 
-});
-$("#name").text(snapshot.val().name);
-$("#destination").text(snapshot.val().destination);
-$("#first-time").text(snapshot.val().firstTrain);
-$("#frequency").text(snapshot.val().frequency);
+// });
+// $("#name").text(snapshot.val().name);
+// $("#destination").text(snapshot.val().destination);
+// $("#first-time").text(snapshot.val().firstTrain);
+// $("#frequency").text(snapshot.val().frequency);
 
     // end document.ready
 // })

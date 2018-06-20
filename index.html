@@ -55,7 +55,7 @@
                         <input type="number" class="form-control" id="frequency" placeholder="">
                     </div>
                     <button id="search" class="btn btn-primary">Search</button>
-                    <button type="submit" id="clear" class="btn btn-primary">Clear</button>
+                    <button  id="clear" class="btn btn-primary">Clear</button>
                 </div>
                 <div class= "col-md-2">
 
@@ -66,17 +66,19 @@
                 <!-- Add table to that will intake the information below. -->
                 <div>
                     <table class="table">
-                        <thead class="thead-light" id=t rainTable>
+                        <thead class="thead-light" >
                             <tr>
                                 <th scope="col">Train Name</th>
                                 <th scope="col">Destination</th>
+                                <th scope="col">First Train</th>
                                 <th scope="col">Frequency</th>
-                                <th scope="col">Next Arrival</th>
+                                <th scope="col">Next train </th>
                                 <th scope="col">Minutes Away</th>
+
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id= "tbdata">
+                            <!-- <tr class= "input-name">
                                 <th scope="row"></th>
                                 <td></td>
                                 <td></td>
@@ -99,7 +101,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
 
