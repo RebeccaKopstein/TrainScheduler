@@ -39,6 +39,7 @@ $(document).ready(function () {
         database.ref().push(newTrain)
     })
 
+// An on click funciton for the clear button to clear the current input so that someone doesn't have  to refresh the page in order to clear the input. 
 
     
     // var childSnapshot
@@ -67,6 +68,7 @@ $(document).ready(function () {
         var tMinutesTillTrain = tFrequency - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
+// Need to figure out the right math for this to work instead of returning a NaN into the table
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
