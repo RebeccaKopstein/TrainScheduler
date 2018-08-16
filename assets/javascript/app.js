@@ -3,7 +3,7 @@ $(document).ready(function () {
 
 
 
-    // Initialize Firebase
+  
     var config = {
         apiKey: "AIzaSyAe21dlE8hmrkN563ND0zFWqhxX7vWnZQE",
         authDomain: "trainscheduler-e420d.firebaseapp.com",
@@ -39,36 +39,31 @@ $(document).ready(function () {
         database.ref().push(newTrain)
     })
 
-// An on click funciton for the clear button to clear the current input so that someone doesn't have  to refresh the page in order to clear the input. 
 
     
-    // var childSnapshot
+  
     database.ref().on("child_added", function (childSnapshot, prevChildKey) {
         console.log(childSnapshot.val().name);
         console.log(childSnapshot.val().destination);
         console.log(childSnapshot.val().firstTrain);
         console.log(childSnapshot.val().trainFrequency);
 
-        var firstTime = firstTrain;
-        var tFrequency
-        frequency = tFrequency
-
-        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-        // console.log(firstTimeConverted);
-
+        var firstTime = childSnapshot.val().firstTrain;
+        var tFrequency = childSnapshot.val().trainFrequency
+       
+console.log(firstTime)
+        
         var currentTime = moment();
-        // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        // console.log("DIFFERENCE IN TIME: " + diffTime);
+        var diffTime = moment().diff(moment(firstTime,"HH:mm"), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
 
         var tRemainder = diffTime % tFrequency;
-        // console.log(tRemainder);
-
+        console.log(tRemainder);
+console.log(tFrequency)
         var tMinutesTillTrain = tFrequency - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-// Need to figure out the right math for this to work instead of returning a NaN into the table
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
@@ -81,51 +76,8 @@ $(document).ready(function () {
           
     
     })
-    // function calculateTimes(freq, firstTrain) {
-    //     var tFrequency = freq;
-
-        // var firstTime = firstTrain;
-        // var tFrequency
-        // frequency = tFrequency
-
-        // var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-        // console.log(firstTimeConverted);
-
-        // var currentTime = moment();
-        // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
-        // var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        // console.log("DIFFERENCE IN TIME: " + diffTime);
-
-        // var tRemainder = diffTime % tFrequency;
-        // console.log(tRemainder);
-
-        // var tMinutesTillTrain = tFrequency - tRemainder;
-        // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
-
-        // var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-        // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
-
-
-    // $("<tbody>").append("<tr class='member-name'> " + childSnapshot.val().name +
-    //     " <td class='member-destination'> " + childSnapshot.val().destination +
-    //       " </td><td class='member-FirstTrain'> " + childSnapshot.val().FirstTrain +
-    //         " </td><td class='member-frequency'> " + childSnapshot.val().frequency + 
-    //         " </td><td class='member-nextTrain'> " + childSnapshot.val().nextTrain + 
-    //         " </td><td class='member-tminutesTillTrain'> " + childSnapshot.val().tminutesTillTrain + " </td></tr>");
           
         }, function(errorObject) {
             console.log("Errors handled: " + errorObject.code);
           });
-
-// database.ref().orderByChild("dateAdded").limitToLast(1).on("child.added", function (snapshot) {
-
-// });
-// $("#name").text(snapshot.val().name);
-// $("#destination").text(snapshot.val().destination);
-// $("#first-time").text(snapshot.val().firstTrain);
-// $("#frequency").text(snapshot.val().frequency);
-
-    // end document.ready
-// })
